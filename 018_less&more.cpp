@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-class Solution{
-    public:
+
  vector<int> getMoreandLess(int arr[], int n, int x){
 vector<int> ans;
 int c8=0;
@@ -18,7 +17,6 @@ for(int i=0; i<n ; i++){
     return ans;
 }
  }
-};
 int main()
 {
 
@@ -28,8 +26,7 @@ int main()
     for(int i=0; i<n ;i++){
         cin>>arr[i];
     }
-    Solution ob;
-    auto ans =ob.getMoreandLess(arr,n,x);
+   auto ans = getMoreandLess(arr,n,x);
     cout<<ans[0]<<" "<<ans[1]<<endl;
 
 
