@@ -41,6 +41,7 @@ int main()
         cout<<"The turnaround time for process "<<i+1<<" "<<ta[i]<<endl;
     }
     int ans=avg(n,ta);
+    
     cout<<"The average turnaround time is: "<<ans;
 
 return 0;
