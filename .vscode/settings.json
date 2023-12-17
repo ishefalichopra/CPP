@@ -1,7 +1,4 @@
 {
-  "files.associations": {
-    "iostream": "cpp"
-  },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
