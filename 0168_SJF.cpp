@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 struct Process
@@ -8,13 +9,16 @@ struct Process
     int at;
 };
 
-bool CompareBurstTime(const Process &p1, const Process &p2)
+struct CompareBurstTime
 {
- 
-        return p1.bt < p2.bt;
-}
+    bool operator()(const Process &p1, const Process &p2)
+    {
 
-void CalCompletionTime(vector<Process> &processes, int n, vector<int> &ct)
+        return p1.bt > p2.bt;
+    }
+};
+
+void CalCompletionTime(const vector<Process> &processes, int n, vector<int> &ct)
 {
     ct[0] = processes[0].bt;
     for (int i = 1; i < n; i++)
@@ -23,7 +27,7 @@ void CalCompletionTime(vector<Process> &processes, int n, vector<int> &ct)
     }
 }
 
-void CalTAT(vector<Process> &processes, int n, vector<int> &ct, vector<int> &tat)
+void CalTAT(const vector<Process> &processes, int n, const vector<int> &ct, vector<int> &tat)
 {
     for (int i = 0; i < n; i++)
     {
@@ -31,7 +35,7 @@ void CalTAT(vector<Process> &processes, int n, vector<int> &ct, vector<int> &tat
     }
 }
 
-void CalWT(vector<Process> &processes, int n, vector<int> &tat, vector<int> &wt)
+void CalWT(const vector<Process> &processes, int n, const vector<int> &tat, vector<int> &wt)
 {
     for (int i = 0; i < n; i++)
     {
@@ -62,16 +66,51 @@ int main()
         cin >> processes[i].at;
     }
 
-    sort(processes.begin(), processes.end(), CompareBurstTime);
-    CalCompletionTime(processes, n, ct);
-    CalTAT(processes, n, ct, tat);
-    CalWT(processes, n, tat, wt);
+    priority_queue<Process, vector<Process>, CompareBurstTime> pq;
+    int currentTime = 0;
+    int processedCount = 0;
 
-    double avgTAT = accumulate(tat.begin(), tat.end(), 0.0) / n;
-    double avgWT = accumulate(wt.begin(), wt.end(), 0.0) / n;
+    while (processedCount < n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (processes[i].at <= currentTime && processes[i].bt > 0)
+            {
+                pq.push(processes[i]);
+            }
+        }
 
-    cout << "Average turnaround time: " << avgTAT << endl;
-    cout << "Average waiting time: " << avgWT << endl;
+        if (!pq.empty())
+        {
+            Process currentProcess = pq.top();
+            pq.pop();
 
-    return 0;
+            int executionTime = min(currentProcess.bt, 1);
+            currentProcess.bt -= executionTime;
+            currentTime += executionTime;
+            ct[currentProcess.id - 1] = currentTime;
+
+            if (currentProcess.bt == 0)
+            {
+                processedCount++;
+            }
+        }
+        else
+        {
+            currentTime++;
+        }
+    }
+}
+CalCompletionTime(processes, n, ct);
+CalTAT(processes, n, ct, tat);
+CalWT(processes, n, tat, wt);
+
+
+double avgTAT = accumulate(tat.begin(), tat.end(), 0.0) / n;
+double avgWT = accumulate(wt.begin(), wt.end(), 0.0) / n;
+
+cout << "Average turnaround time: " << avgTAT << endl;
+cout << "Average waiting time: " << avgWT << endl;
+
+return 0;
 }
