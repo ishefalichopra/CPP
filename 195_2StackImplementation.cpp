@@ -60,6 +60,7 @@ class twostacks{
 
 int main()
 {
+    twostacks ts(5);
     ts.push1(5);
     ts.push2(10);
     ts.push2(15);
