@@ -24,7 +24,7 @@ int main()
 {
     string haystack, needle;
     cin>>haystack>>needle;
-    cout<<strStr(haystack, needle)<<endl;
+    cout<<strStr(haystack, needle)<<endl;23
 
 return 0;
 }
