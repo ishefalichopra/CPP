@@ -39,7 +39,7 @@ int main()
     for (auto i : result)
     {
         cout << i << endl;
-    }
+    }247_
 
 return 0;
 }
