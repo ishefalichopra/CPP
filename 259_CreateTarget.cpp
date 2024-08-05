@@ -51,7 +51,7 @@ int solveTab(vector<int>&num, int tar){
 }
 
 int findWays(vector<int>&num, int tar){
-    // return solve(num, tar);
+    // return solve(num, tar);26
 
     // vector<int>dp(tar+1, -1);
     // return solveMem(num, tar, dp);
