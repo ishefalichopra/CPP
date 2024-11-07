@@ -58,7 +58,5 @@ int main()
     vector<string> strs = {"10", "0001", "111001", "1", "0"};
     int m = 5, n = 3;
     cout << findMaxForm(strs, m, n) << endl;
-    
-
     return 0;
 }
