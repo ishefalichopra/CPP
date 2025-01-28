@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
-using namespace std;
+using name
+
+
+
+-Recursicespace std;
 
 void printGfg(int N)
 {
