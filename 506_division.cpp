@@ -10,11 +10,15 @@ int divide(int dividend, int divisor){
     long long absDivisor = abs((long long)divisor);
     long long quotient = 0;
 
-    while(absDividend >= absDivisor){
-        absDividend -= absDivisor;
-        quotient++;
+  while(absDividend >= absDivisor) {
+        long long temp = absDivisor, multiple = 1;
+        while (absDividend >= (temp << 1)) { // Double the divisor until it exceeds the dividend
+            temp <<= 1;
+            multiple <<= 1;
+        }
+        absDividend -= temp; // Subtract the largest multiple of divisor from dividend
+        quotient += multiple; // Add the multiples to the quotient
     }
-
     return sign * quotient;
 }
 
