@@ -98,6 +98,7 @@ Node *sortKSortedDLLUsingHeap(Node *head, int k)
             last = smallest;
         }
 
+        // move the next unprocessed node from original list to the heap, if it exists as in head
         if (head)
         {
             pq.push(head);
