@@ -57,6 +57,56 @@ Node *sortKSortedDLL(Node *head, int k)
     }
     return head;
 }
+struct compare
+{
+    operator()(Node * a, Node * b)
+    {
+        return a->data > b->data;
+    }
+};
+
+Node *sortKSortedDLLUsingHeap(Node *head, int k)
+{
+    if (!head)
+        return head;
+    priority_queue<Node *, vector<Node *>, compare> pq;
+
+    Node *newHead = nullptr;
+    Node *last = nullptr;
+
+    for (int i = 0; head && i <= k; i++)
+    {
+        pq.push(head);
+        head = head->next;
+    }
+
+    while (!pq.empty())
+    {
+        Node *smallest = pq.top();
+        pq.pop();
+
+        if (!newHead)
+        {
+            newHead = smallest;
+            newHead->prev = nullptr;
+            last = newHead;
+        }
+        else
+        {
+            last->next = smallest;
+            smallest->prev = last;
+            last = smallest;
+        }
+
+        if (head)
+        {
+            pq.push(head);
+            head = head->next;
+        }
+    }
+    last->next = nullptr;
+    return newHead;
+}
 
 int main()
 {
@@ -79,7 +129,9 @@ int main()
     head->next->next->next->next->next->next->next->next->prev = head->next->next->next->next->next->next;
     head->next->next->next->next->next->next->next->next->next = new Node(13);
 
-    sortKSortedDLL(head, 3);
+    // sortKSortedDLL(head, 3);
+
+    sortKSortedDLLUsingHeap(head, 3);
     Node *temp = head;
     while (temp)
     {
