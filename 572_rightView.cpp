@@ -13,6 +13,7 @@ struct Node
         right = NULL;
     }
 };
+
 vector<int> rightView(Node *root)
 {
     vector<int> right;
