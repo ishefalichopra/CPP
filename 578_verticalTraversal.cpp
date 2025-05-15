@@ -78,7 +78,7 @@ int main()
             cout << ans[i][j] << " ";
         }
         cout << endl;
-    }
+    } 
 
     return 0;
 }
