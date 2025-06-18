@@ -25,7 +25,6 @@ int main()
         cin >> arr[i];
     }
     cout << subarraySum(arr) << endl;
-    
 
     return 0;
 }
